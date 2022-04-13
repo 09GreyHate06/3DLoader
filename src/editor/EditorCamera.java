@@ -1,17 +1,13 @@
-package scene;
+package editor;
 
 import glCore.core.Input;
 import glCore.core.Time;
 import glCore.events.Event;
 import glCore.events.EventDispatcher;
-import glCore.events.EventType;
 import glCore.events.mouseEvent.MouseScrolledEvent;
 import org.joml.*;
 import org.joml.Math;
 import org.lwjgl.glfw.GLFW;
-
-import java.awt.image.TileObserver;
-import java.util.Vector;
 
 public class EditorCamera {
 

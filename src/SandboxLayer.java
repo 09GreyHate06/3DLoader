@@ -1,4 +1,5 @@
 import com.badlogic.ashley.core.Entity;
+import editor.SceneHierarchyPanel;
 import glCore.core.Application;
 import glCore.core.Layer;
 import glCore.core.Time;
@@ -18,21 +19,19 @@ import org.joml.Vector2f;
 import org.joml.Vector3f;
 import org.joml.Vector4f;
 import org.lwjgl.opengl.GL33;
-import scene.EditorCamera;
+import editor.EditorCamera;
 import scene.Scene;
 import scene.components.TransformComponent;
 import scene.components.renderering.*;
 import scene.sytems.RenderingSystem;
 import utils.AssetManager;
 
-import java.nio.ByteBuffer;
-import java.util.concurrent.TransferQueue;
-
 public class SandboxLayer extends Layer {
 
     private Scene _scene;
 
     private EditorCamera _camera;
+    private SceneHierarchyPanel _sceneHierarchyPanel;
 
     private Framebuffer _msFramebuffer;
     private Framebuffer _framebuffer;
@@ -64,6 +63,7 @@ public class SandboxLayer extends Layer {
 
         _scene = new Scene();
         _scene.addSystem(new RenderingSystem(_camera, _msFramebuffer));
+        _sceneHierarchyPanel = new SceneHierarchyPanel(_scene);
 
         float[] cubeVert = new float[]{
                 // pos                // texCoord
@@ -229,6 +229,8 @@ public class SandboxLayer extends Layer {
                 _sceneViewportWidth, _sceneViewportHeight, 0, 1, 1, 0);
         ImGui.end();
         ImGui.popStyleVar();
+
+        _sceneHierarchyPanel.onImGuiRender();
 
         ImGui.begin("FPS");
         ImGui.text(Float.toString(ImGui.getIO().getFramerate()));

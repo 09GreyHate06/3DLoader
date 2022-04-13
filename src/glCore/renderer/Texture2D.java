@@ -17,10 +17,13 @@ public class Texture2D implements IRendererResource {
 
     private boolean _isValid;
 
+    private String _filepath = "N/A";
+
     public int _bindSlot = 0;
 
     // set width, height, nrComp, -1 to used loaded image value
     public Texture2D(String filename, boolean flipImageY, int minFilter, int magFilter, int wrapS, int wrapT){
+        _filepath = filename;
 
         try (MemoryStack stack = MemoryStack.stackPush()) {
             IntBuffer w = stack.mallocInt(1);
@@ -85,6 +88,10 @@ public class Texture2D implements IRendererResource {
     public Texture2D(ByteBuffer pixels, int width, int height, int nrComp){
         this(pixels, width, height, nrComp, GL33.GL_LINEAR_MIPMAP_LINEAR,
                 GL33.GL_LINEAR, GL33.GL_REPEAT, GL33.GL_REPEAT);
+    }
+
+    public String getFilepath(){
+        return _filepath;
     }
 
     public int getWidth(){

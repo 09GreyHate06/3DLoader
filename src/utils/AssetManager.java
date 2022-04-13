@@ -23,25 +23,25 @@ public class AssetManager {
     }
 
     public static Shader loadAndAddShader(String key, String filename){
+        if(_shaderMap.containsKey(key)) return _shaderMap.get(key);
+
         var shader = new Shader(filename);
-        var prevShader = _shaderMap.put(key, shader);
-        if(prevShader != null)
-            prevShader.destroy();
+        _shaderMap.put(key, shader);
         return shader;
     }
 
     public static Shader loadAndAddShader(String key, String vertSrc, String fragSrc){
+        if(_shaderMap.containsKey(key)) return _shaderMap.get(key);
+
         var shader = new Shader(vertSrc, fragSrc);
-        var prevShader = _shaderMap.put(key, shader);
-        if(prevShader != null)
-            prevShader.destroy();
+        _shaderMap.put(key, shader);
         return shader;
     }
 
     public static Shader addShader(String key, Shader shader){
-        var prevShader = _shaderMap.put(key, shader);
-        if(prevShader != null)
-            prevShader.destroy();
+        if(_shaderMap.containsKey(key)) return _shaderMap.get(key);
+
+        _shaderMap.put(key, shader);
         return shader;
     }
 
@@ -60,26 +60,24 @@ public class AssetManager {
     }
 
     public static Texture2D loadAndAddTexture2D(String key, String filename, boolean flipImageY, int minFilter, int magFilter, int wrapS, int wrapT){
+        if(_textureMap.containsKey(key)) return _textureMap.get(key);
+
         var texture = new Texture2D(filename, flipImageY, minFilter, magFilter, wrapS, wrapT);
-        var prevTexture = _textureMap.put(key, texture);
-        if(prevTexture != null)
-            prevTexture.destroy();
+        _textureMap.put(key, texture);
         return texture;
     }
 
     public static Texture2D loadAndAddTexture2D(String key, ByteBuffer pixels, int width, int height, int nrComp,
                                                 int minFilter, int magFilter, int wrapS, int wrapT){
+        if(_textureMap.containsKey(key)) return _textureMap.get(key);
         var texture = new Texture2D(pixels, width, height, nrComp, minFilter, magFilter, wrapS, wrapT);
-        var prevTexture = _textureMap.put(key, texture);
-        if(prevTexture != null)
-            prevTexture.destroy();
+        _textureMap.put(key, texture);
         return texture;
     }
 
     public static Texture2D addTexture2D(String key, Texture2D texture){
-        var prevTexture = _textureMap.put(key, texture);
-        if(prevTexture != null)
-            prevTexture.destroy();
+        if(_textureMap.containsKey(key)) return _textureMap.get(key);
+        _textureMap.put(key, texture);
         return texture;
     }
 

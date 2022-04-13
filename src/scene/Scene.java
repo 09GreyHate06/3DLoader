@@ -73,7 +73,7 @@ public class Scene {
         _engine.update(delta);
     }
 
-    private void setEntityRelationship(Entity entity, Entity parent){
+    public void setEntityRelationship(Entity entity, Entity parent){
         var relationship = entity.getComponent(RelationshipComponent.class);
 
         if (relationship.parent != null){
